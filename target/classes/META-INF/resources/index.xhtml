@@ -51,7 +51,7 @@
             <h:panelGroup rendered="#{not productBean.showForm}">
                 <p:toolbar style="margin-bottom: 1rem; border: none; background: transparent; padding: 0;">
                     <p:toolbarGroup>
-                        <p:commandButton value="Nuevo (Modal)" icon="pi pi-plus" actionListener="#{productBean.openNew}"
+                        <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{productBean.openNew}"
                                          update=":dialogs:manage-product-content" oncomplete="PF('manageProductDialog').show()"
                                          styleClass="ui-button-success" style="margin-right: .5rem">
                             <p:resetInput target=":dialogs:manage-product-content" />
