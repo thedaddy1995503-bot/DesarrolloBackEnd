@@ -12,7 +12,7 @@ Este proyecto es la resolución de la prueba técnica para Desarrollador Backend
 1. Clonar el repositorio.
 2. Navegar al directorio raíz del proyecto:
    ```bash
-   cd DesarrolladorBackEnd
+   cd DesarrolladoBackEnd
    ```
 3. Compilar y ejecutar la aplicación usando Maven:
    ```bash
@@ -29,7 +29,7 @@ Este proyecto es la resolución de la prueba técnica para Desarrollador Backend
 
 ## Ejecución con Docker
 
-Si prefieres ejecutar el proyecto usando Docker, he incluido un `Dockerfile` optimizado.
+Si prefieres ejecutar el proyecto usando Docker, se ha incluido un `Dockerfile` optimizado.
 
 1. Construir la imagen de Docker:
    ```bash
