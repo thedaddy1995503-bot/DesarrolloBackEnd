@@ -23,7 +23,27 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product create(Product product) {
         product.setActive(true);
-        // Note: For extra points we could add external API integration here, but omitting for JSF focus unless requested.
+        
+        // Integración con API pública para Puntos Extra
+        if (product.getDescription() == null || product.getDescription().trim().isEmpty()) {
+            try {
+                // Fakestore tiene 20 productos, elegimos uno al azar para simular la obtención de una descripción
+                int randomId = (int) (Math.random() * 20) + 1;
+                String url = "https://fakestoreapi.com/products/" + randomId;
+                org.springframework.web.client.RestTemplate restTemplate = new org.springframework.web.client.RestTemplate();
+                
+                @SuppressWarnings("unchecked")
+                java.util.Map<String, Object> response = restTemplate.getForObject(url, java.util.Map.class);
+                
+                if (response != null && response.containsKey("description")) {
+                    product.setDescription((String) response.get("description"));
+                }
+            } catch (Exception e) {
+                // Si la API externa falla (sin internet, timeout, etc), usamos un fallback
+                product.setDescription("Descripción genérica (API externa no disponible).");
+            }
+        }
+        
         return productRepository.save(product);
     }
 

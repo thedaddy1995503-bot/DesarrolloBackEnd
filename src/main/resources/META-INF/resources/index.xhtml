@@ -24,16 +24,14 @@
             <h:form id="sidebar-form">
                 <div class="sidebar-menu">
                     <!-- Opción 1: Lista Productos -->
-                    <a href="#" class="sidebar-item active">
+                    <p:commandLink styleClass="sidebar-item #{not productBean.showForm ? 'active' : ''}" actionListener="#{productBean.showListView}" update=":mainPanel :sidebar-form" style="text-decoration: none;">
                         <i class="pi pi-list"></i> Lista Productos
-                    </a>
+                    </p:commandLink>
                     
-                    <!-- Opción 2: Nuevo Producto (Abre Modal) -->
-                    <p:commandLink class="sidebar-item" actionListener="#{productBean.openNew}"
-                                   update=":dialogs:manage-product-content" oncomplete="PF('manageProductDialog').show()"
-                                   style="text-decoration: none;">
+                    <!-- Opción 2: Nuevo Producto (En Pantalla) -->
+                    <p:commandLink styleClass="sidebar-item #{productBean.showForm ? 'active' : ''}" actionListener="#{productBean.showNewView}"
+                                   update=":mainPanel :sidebar-form" style="text-decoration: none;">
                         <i class="pi pi-plus-circle"></i> Nuevo Producto
-                        <p:resetInput target=":dialogs:manage-product-content" />
                     </p:commandLink>
                 </div>
             </h:form>
@@ -46,6 +44,21 @@
                 <p>Resumen general de operaciones</p>
             </div>
             
+            <!-- PANEL PRINCIPAL DINÁMICO -->
+            <h:panelGroup id="mainPanel" layout="block">
+            
+            <!-- VISTA 1: TABLA DE PRODUCTOS -->
+            <h:panelGroup rendered="#{not productBean.showForm}">
+                <p:toolbar style="margin-bottom: 1rem; border: none; background: transparent; padding: 0;">
+                    <p:toolbarGroup>
+                        <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{productBean.openNew}"
+                                         update=":dialogs:manage-product-content" oncomplete="PF('manageProductDialog').show()"
+                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                            <p:resetInput target=":dialogs:manage-product-content" />
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
             <!-- TARJETA CON LA TABLA -->
             <div class="dashboard-card">
                 <h:form id="form">
@@ -89,6 +102,49 @@
                     </p:dataTable>
                 </h:form>
             </div>
+            </h:panelGroup>
+
+            <!-- VISTA 2: FORMULARIO EN PANTALLA (Premium Design) -->
+            <h:panelGroup rendered="#{productBean.showForm}">
+                <div class="dashboard-card" style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="margin-top: 0; color: var(--text-main); font-weight: 700;">Crear Nuevo Producto</h2>
+                    <p style="color: #64748b; margin-bottom: 2rem;">Ingresa los detalles del producto a continuación.</p>
+                    
+                    <h:form id="inlineForm">
+                        <p:outputPanel>
+                            <div class="form-container">
+                                <div class="field" style="margin-bottom: 1.5rem;">
+                                    <p:outputLabel for="inlineName" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Nombre del Producto</p:outputLabel>
+                                    <p:inputText id="inlineName" value="#{productBean.selectedProduct.name}" required="true" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" placeholder="Ej. Taladro Eléctrico" />
+                                </div>
+                                <div class="field" style="margin-bottom: 1.5rem;">
+                                    <p:outputLabel for="inlineDesc" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Descripción (Opcional)</p:outputLabel>
+                                    <p:inputTextarea id="inlineDesc" value="#{productBean.selectedProduct.description}" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" rows="4" placeholder="Si la dejas en blanco, se generará una automáticamente desde FakeStoreAPI" />
+                                </div>
+                                <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                                    <div class="field" style="flex: 1;">
+                                        <p:outputLabel for="inlinePrice" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Precio</p:outputLabel>
+                                        <p:inputNumber id="inlinePrice" value="#{productBean.selectedProduct.price}" symbol=" $" symbolPosition="s" decimalSeparator="." thousandSeparator="," style="width: 100%;" inputStyle="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" placeholder="0.00" />
+                                    </div>
+                                    <div class="field" style="flex: 1;">
+                                        <p:outputLabel for="inlineStock" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Stock Inicial</p:outputLabel>
+                                        <p:spinner id="inlineStock" value="#{productBean.selectedProduct.stock}" min="0" style="width: 100%; display: block;" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: flex-end; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+                                <p:commandButton value="Cancelar" icon="pi pi-times" actionListener="#{productBean.showListView}"
+                                                 update=":mainPanel" process="@this" styleClass="ui-button-secondary ui-button-flat" immediate="true" style="width: auto; padding: 0.5rem 1rem; font-weight: 600;" />
+                                <p:commandButton value="Guardar Producto" icon="pi pi-check" actionListener="#{productBean.saveProduct}"
+                                                 update=":mainPanel :form:messages" process="@form" styleClass="ui-button-primary" style="width: auto; padding: 0.5rem 1.5rem; font-weight: 600; border-radius: 6px;" />
+                            </div>
+                        </p:outputPanel>
+                    </h:form>
+                </div>
+            </h:panelGroup>
+            
+            </h:panelGroup>
         </div>
 
         <!-- DIÁLOGOS MODALES (NUEVO/EDITAR Y ELIMINAR) -->

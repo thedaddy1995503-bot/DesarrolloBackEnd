@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
 
@@ -18,6 +19,7 @@ public class Product {
 
     private String name;
 
+    @Column(length = 2000)
     private String description;
 
     private BigDecimal price;

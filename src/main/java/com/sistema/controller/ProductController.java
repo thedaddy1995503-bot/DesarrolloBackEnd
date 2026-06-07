@@ -26,7 +26,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         Product product = productService.findById(id);
-        return ResponseEntity.ok(productMapper.toDTO(product));
+        return ResponseEntity.ok(productMapper.toDto(product));
     }
 
     /**
@@ -38,6 +38,6 @@ public class ProductController {
             @RequestBody StockUpdateDTO stockUpdate) {
         
         Product updatedProduct = productService.updateStock(id, stockUpdate.getQuantityChange());
-        return ResponseEntity.ok(productMapper.toDTO(updatedProduct));
+        return ResponseEntity.ok(productMapper.toDto(updatedProduct));
     }
 }

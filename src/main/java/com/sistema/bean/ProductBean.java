@@ -28,6 +28,8 @@ public class ProductBean implements Serializable {
 
     private ProductDTO selectedProduct;
 
+    private boolean showForm = false;
+
     public ProductBean(ProductService productService, ProductMapper productMapper) {
         this.productService = productService;
         this.productMapper = productMapper;
@@ -37,6 +39,18 @@ public class ProductBean implements Serializable {
     public void setProducts(List<ProductDTO> products) { this.products = products; }
     public ProductDTO getSelectedProduct() { return selectedProduct; }
     public void setSelectedProduct(ProductDTO selectedProduct) { this.selectedProduct = selectedProduct; }
+    public boolean isShowForm() { return showForm; }
+    public void setShowForm(boolean showForm) { this.showForm = showForm; }
+
+    public void showListView() {
+        this.showForm = false;
+    }
+
+    public void showNewView() {
+        this.selectedProduct = new ProductDTO();
+        this.selectedProduct.setStock(0);
+        this.showForm = true;
+    }
 
     @PostConstruct
     public void init() {
@@ -70,8 +84,9 @@ public class ProductBean implements Serializable {
             }
 
             loadProducts();
+            this.showForm = false;
             PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+            PrimeFaces.current().ajax().update("form:messages", "form:dt-products", "mainPanel");
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         }

@@ -1,6 +1,8 @@
 C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\Application.java
 C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\bean\ProductBean.java
+C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\controller\ProductController.java
 C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\dto\ProductDTO.java
+C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\dto\StockUpdateDTO.java
 C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\exception\BusinessException.java
 C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\exception\InsufficientStockException.java
 C:\Users\juank\OneDrive\Documentos\NetBeansProjects\DesarrolladorBackEnd\src\main\java\com\sistema\exception\ProductNotFoundException.java

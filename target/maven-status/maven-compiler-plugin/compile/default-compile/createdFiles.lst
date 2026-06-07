@@ -1,9 +1,11 @@
+com\sistema\controller\ProductController.class
 com\sistema\mapper\ProductMapper.class
 com\sistema\exception\BusinessException.class
 com\sistema\Application.class
 com\sistema\service\ProductService.class
 com\sistema\mapper\ProductMapperImpl.class
 com\sistema\dto\ProductDTO.class
+com\sistema\dto\StockUpdateDTO.class
 com\sistema\exception\ProductNotFoundException.class
 com\sistema\service\impl\ProductServiceImpl.class
 com\sistema\repository\ProductRepository.class
