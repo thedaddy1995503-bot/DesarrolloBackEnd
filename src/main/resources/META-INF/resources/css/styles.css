@@ -1,0 +1,176 @@
+/* Variables Globales y Diseño Premium */
+:root {
+    --bg-sidebar: #1e293b;
+    --bg-main: #f1f5f9;
+    --text-sidebar: #94a3b8;
+    --text-sidebar-hover: #ffffff;
+    --bg-sidebar-hover: #334155;
+    --bg-sidebar-active: #2563eb;
+    --card-bg: #ffffff;
+    --text-main: #334155;
+    --border-color: #e2e8f0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* Layout Dashboard */
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Barra Lateral (Sidebar) */
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    color: var(--text-sidebar);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 2rem 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.sidebar-subtitle {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    gap: 0.5rem;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-sidebar);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar-item i {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.sidebar-item:hover {
+    background-color: var(--bg-sidebar-hover);
+    color: var(--text-sidebar-hover);
+}
+
+.sidebar-item.active {
+    background-color: var(--bg-sidebar-active);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+}
+
+/* Ocultar botones nativos de PrimeFaces dentro de links personalizados */
+.sidebar-item button {
+    display: none;
+}
+
+/* Área Principal */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem 3rem;
+}
+
+.content-header {
+    margin-bottom: 2rem;
+}
+
+.content-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #0f172a;
+}
+
+.content-header p {
+    margin: 0;
+    color: #64748b;
+}
+
+/* Tarjeta Principal */
+.dashboard-card {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Ajustes a la tabla de PrimeFaces para hacerla lucir premium */
+.products-table .ui-datatable-header {
+    background: transparent !important;
+    border: none !important;
+    padding-bottom: 1rem;
+    font-weight: 600;
+}
+
+.products-table th {
+    background-color: #f8fafc !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    border-top: none !important;
+}
+
+.products-table td {
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+/* Fix para resetear los estilos de botones inline de primefaces si es necesario */
+.sidebar-btn-wrapper .ui-button {
+    background: transparent;
+    border: none;
+    color: inherit;
+    text-align: left;
+    padding: 0;
+    width: 100%;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    box-shadow: none;
+}
+.sidebar-btn-wrapper .ui-button:hover,
+.sidebar-btn-wrapper .ui-button:focus,
+.sidebar-btn-wrapper .ui-button:active {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: inherit !important;
+}
+.sidebar-btn-wrapper .ui-button span.ui-button-text {
+    padding: 0;
+}
