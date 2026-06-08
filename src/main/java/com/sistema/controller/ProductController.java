@@ -27,7 +27,7 @@ public class ProductController {
      * Listar todos los productos (Paginado)
      */
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts(
+    public ResponseEntity<java.util.Map<String, Object>> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         
@@ -36,7 +36,13 @@ public class ProductController {
                 .map(productMapper::toDto)
                 .collect(Collectors.toList());
         
-        return ResponseEntity.ok(dtos);
+        java.util.Map<String, Object> response = new java.util.LinkedHashMap<>();
+        response.put("totalElements", productsPage.getTotalElements());
+        response.put("totalPages", productsPage.getTotalPages());
+        response.put("size", productsPage.getSize());
+        response.put("content", dtos);
+        
+        return ResponseEntity.ok(response);
     }
 
     /**
