@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  product-service:
+    build: .
+    container_name: product-catalog-ms
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    restart: unless-stopped

@@ -1,13 +1,19 @@
-# Etapa 1: Construcción
-FROM maven:3.9.6-eclipse-temurin-17 AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+# Usamos la imagen oficial de Java 17 (versión ligera)
+FROM eclipse-temurin:17-jdk-alpine
 
-# Etapa 2: Ejecución
-FROM eclipse-temurin:17-jre-jammy
+# Etiqueta de metadata
+LABEL maintainer="juank@example.com"
+LABEL description="Product Catalog Microservice"
+
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
-COPY --from=build /app/target/DesarrolladorBackEnd-1.0-SNAPSHOT.jar app.jar
+
+# Copiamos el archivo JAR compilado
+# Asumimos que primero se corre `mvn clean package` localmente.
+COPY target/*.jar app.jar
+
+# Exponemos el puerto definido en application.properties
 EXPOSE 9090
+
+# Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
